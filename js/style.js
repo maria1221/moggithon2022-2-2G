@@ -30,6 +30,25 @@ timeSelect.forEach(option => {
     });
   });
 
+
+
+// 音楽を流す関数
+const checkPlaying = song => {
+  if (song.paused) {
+    // .paused メディア要素が一時停止しているかどうかを示す
+    // .play メディアの再生を開始する
+    song.play();
+    video.play();
+    // 中央のボタンが停止ボタンになる
+    play.src = "../svg/pause.svg";
+  } else {
+    song.pause();
+    video.pause();
+    // 中央のボタンが再生ボタンになる
+    play.src = "../svg/play.svg";
+  }
+};
+
 // 右のボタンをクリックしたときに音楽を流す
 sounds.forEach(sound => {
   sound.addEventListener("click", function() {
@@ -42,23 +61,6 @@ sounds.forEach(sound => {
     checkPlaying(song);
   });
 });
-
-// 音楽を流す関数
-const checkPlaying = song => {
-  if (song.paused) {
-    // .paused メディア要素が一時停止しているかどうかを示す
-    // .play メディアの再生を開始する
-    song.play();
-    video.play();
-    // 中央のボタンが停止ボタンになる
-    play.src = "./svg/pause.svg";
-  } else {
-    song.pause();
-    video.pause();
-    // 中央のボタンが再生ボタンになる
-    play.src = "./svg/play.svg";
-  }
-};
 
 //playボタンクリック時に発火、音楽
 play.addEventListener("click", function() {
@@ -79,18 +81,6 @@ const restartSong = song =>{
 }
 
 
-const checkPlaying = song => {
-  if (song.paused) {   //再生する
-    song.play();
-    video.play();
-    play.src = "./svg/pause.svg";  //停止するボタン表示
-  } else {
-    song.pause();       //停止する
-    video.pause();
-    play.src = "./svg/play.svg";   //再生するボタン表示
-  }
-};
-
 song.ontimeupdate = function() {
   let currentTime = song.currentTime;
   let elapsed = fakeDuration - currentTime; // 設定時間ー経過時間
@@ -103,7 +93,7 @@ song.ontimeupdate = function() {
   if (currentTime >= fakeDuration) {    //ここで停止条件
     song.pause();
     song.currentTime = 0;
-    play.src = "./svg/play.svg";
+    play.src = "../svg/play.svg";
     video.pause();
   }
 };
