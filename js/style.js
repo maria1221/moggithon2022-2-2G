@@ -20,6 +20,15 @@ timeDisplay.textContent = `${Math.floor(fakeDuration / 60)}:${Math.floor(
 fakeDuration % 60
 )}`;
 
+// 時間の設定
+timeSelect.forEach(option => {
+    option.addEventListener("click", function() {
+      fakeDuration = this.getAttribute("data-time");
+      timeDisplay.textContent = `${Math.floor(fakeDuration / 60)}:${Math.floor(
+        fakeDuration % 60
+      )}`;
+    });
+  });
 
 // 右のボタンをクリックしたときに音楽を流す
 sounds.forEach(sound => {
